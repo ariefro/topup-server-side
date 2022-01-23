@@ -19,6 +19,7 @@ const API_ROUTES = {
   UPDATE_VOUCHER: `/admin/voucher/edit/${ROUTE_PARAMS.id}`,
   DELETE_VOUCHER: `/admin/voucher/delete/${ROUTE_PARAMS.id}`,
   UPDATE_STATUS_VOUCHER: `/admin/voucher/status/${ROUTE_PARAMS.id}`,
+  CREATE_BANK: '/admin/bank/create',
 };
 
 const VIEW_ROUTES = {
@@ -33,6 +34,8 @@ const VIEW_ROUTES = {
   VOUCHER: '/admin/voucher',
   CREATE_VOUCHER: '/admin/voucher/create',
   UPDATE_VOUCHER: `/admin/voucher/edit/${ROUTE_PARAMS.id}`,
+  CREATE_BANK: '/admin/bank/create',
+  BANK: '/admin/bank',
 };
 
 export { API_ROUTES, VIEW_ROUTES };
