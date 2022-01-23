@@ -24,5 +24,6 @@ router.get(API_ROUTES.GET_VOUCHER, VoucherController.getAllData);
 router.get(API_ROUTES.GET_VOUCHER_BY_ID, VoucherController.getDataById);
 router.put(API_ROUTES.UPDATE_VOUCHER, multer({ dest: os.tmpdir() }).single('image'), VoucherController.updateVoucher);
 router.delete(API_ROUTES.DELETE_VOUCHER, VoucherController.deleteVoucher);
+router.put(API_ROUTES.UPDATE_STATUS_VOUCHER, VoucherController.updateStatusVoucher);
 
 export default router;

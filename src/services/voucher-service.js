@@ -52,6 +52,14 @@ class VoucherService {
 
     return voucher;
   };
+
+  static updateStatusVoucher = async ({ id, status }) => {
+    const voucher = await Voucher.findOneAndUpdate({
+      _id: id,
+    }, { status });
+
+    return voucher;
+  };
 }
 
 export default VoucherService;

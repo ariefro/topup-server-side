@@ -177,6 +177,21 @@ class VoucherController {
 
     res.redirect('/admin/voucher');
   };
+
+  static updateStatusVoucher = async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      let voucher = await VoucherService.getVoucherById({ id });
+      const status = voucher.status === 'active' ? 'non active' : 'active';
+
+      voucher = await Voucher.findByIdAndUpdate({ _id: id }, { status });
+
+      res.redirect('/admin/voucher');
+    } catch (err) {
+      console.log(err);
+    }
+  };
 }
 
 export default VoucherController;
