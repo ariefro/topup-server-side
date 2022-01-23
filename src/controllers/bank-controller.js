@@ -31,6 +31,36 @@ class BankController {
       console.log(err);
     }
   };
+
+  static actionUpdate = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { name, bankName, noRekening } = req.body;
+
+      await BankService.actionUpdate({
+        id,
+        name,
+        bankName,
+        noRekening,
+      });
+
+      res.redirect('/admin/bank');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  static formUpdate = async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const bank = await BankService.getById({ id });
+
+      res.render('admin/bank/edit', { bank });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 }
 
 export default BankController;

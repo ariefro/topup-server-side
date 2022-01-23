@@ -21,6 +21,29 @@ class BankService {
 
     return bank;
   };
+
+  static getById = async ({ id }) => {
+    const bank = await Bank.findOne({ _id: id });
+
+    if (!bank) {
+      throw new Error(ERRORS.NOT_FOUND);
+    }
+
+    return bank;
+  };
+
+  static actionUpdate = async ({
+    id,
+    name,
+    bankName,
+    noRekening,
+  }) => {
+    const bank = await Bank.findOneAndUpdate({
+      _id: id,
+    }, { name, bankName, noRekening });
+
+    return bank;
+  };
 }
 
 export default BankService;

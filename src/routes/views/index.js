@@ -25,5 +25,6 @@ router.get(VIEW_ROUTES.UPDATE_VOUCHER, VoucherController.formEditVoucher);
 
 router.get(VIEW_ROUTES.BANK, BankController.viewBank);
 router.get(VIEW_ROUTES.CREATE_BANK, BankController.formCreate);
+router.get(VIEW_ROUTES.UPDATE_BANK, BankController.formUpdate);
 
 export default router;
