@@ -9,11 +9,18 @@ import VoucherService from '../services/voucher-service';
 class VoucherController {
   static viewVoucher = async (req, res) => {
     try {
+      const alertMessage = req.flash('alertMessage');
+      const alertStatus = req.flash('alertStatus');
+      const alert = { message: alertMessage, status: alertStatus };
+
       const voucher = await VoucherService.getAllVoucher();
 
-      res.render('admin/voucher', { voucher });
+      res.render('admin/voucher', { voucher, alert });
     } catch (err) {
-      console.log(err);
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/admin/voucher');
     }
   };
 
@@ -75,6 +82,9 @@ class VoucherController {
 
             await voucher.save();
 
+            req.flash('alertMessage', 'Add data successfully');
+            req.flash('alertStatus', 'success');
+
             res.redirect('/admin/voucher');
           } catch (err) {
             console.log(err);
@@ -88,10 +98,15 @@ class VoucherController {
         });
         await voucher.save();
 
+        req.flash('alertMessage', 'Add data successfully');
+        req.flash('alertStatus', 'success');
+
         res.redirect('/admin/voucher');
       }
     } catch (err) {
-      console.log(err);
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
       res.redirect('/admin/voucher');
     }
   };
@@ -143,9 +158,14 @@ class VoucherController {
               thumbnail: filename,
             });
 
+            req.flash('alertMessage', 'Edit data successfully');
+            req.flash('alertStatus', 'success');
+
             res.redirect('/admin/voucher');
           } catch (err) {
-            console.log(err);
+            req.flash('alertMessage', `${err.message}`);
+            req.flash('alertStatus', 'danger');
+
             res.redirect('/admin/voucher');
           }
         });
@@ -158,24 +178,39 @@ class VoucherController {
           nominal,
         });
 
+        req.flash('alertMessage', 'Edit data successfully');
+        req.flash('alertStatus', 'success');
+
         res.redirect('/admin/voucher');
       }
     } catch (err) {
-      console.log(err);
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
       res.redirect('/admin/voucher');
     }
   };
 
   static deleteVoucher = async (req, res) => {
-    const { id } = req.params;
-    const voucher = await VoucherService.deleteVoucher({ id });
+    try {
+      const { id } = req.params;
+      const voucher = await VoucherService.deleteVoucher({ id });
 
-    const currentImage = `${config.rootPath}/public/uploads/${voucher.thumbnail}`;
-    if (fs.existsSync(currentImage)) {
-      fs.unlinkSync(currentImage);
+      const currentImage = `${config.rootPath}/public/uploads/${voucher.thumbnail}`;
+      if (fs.existsSync(currentImage)) {
+        fs.unlinkSync(currentImage);
+      }
+
+      req.flash('alertMessage', 'Delete data successfully');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/admin/voucher');
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/admin/voucher');
     }
-
-    res.redirect('/admin/voucher');
   };
 
   static updateStatusVoucher = async (req, res) => {
@@ -187,9 +222,15 @@ class VoucherController {
 
       voucher = await Voucher.findByIdAndUpdate({ _id: id }, { status });
 
+      req.flash('alertMessage', 'Edit status successfully');
+      req.flash('alertStatus', 'success');
+
       res.redirect('/admin/voucher');
     } catch (err) {
-      console.log(err);
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/admin/voucher');
     }
   };
 }
