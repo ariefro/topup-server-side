@@ -29,5 +29,6 @@ router.put(API_ROUTES.UPDATE_STATUS_VOUCHER, VoucherController.updateStatusVouch
 
 router.post(API_ROUTES.CREATE_BANK, BankController.actionCreate);
 router.put(API_ROUTES.UPDATE_BANK, BankController.actionUpdate);
+router.delete(API_ROUTES.DELETE_BANK, BankController.actionDelete);
 
 export default router;

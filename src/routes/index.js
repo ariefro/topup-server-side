@@ -21,6 +21,7 @@ const API_ROUTES = {
   UPDATE_STATUS_VOUCHER: `/admin/voucher/status/${ROUTE_PARAMS.id}`,
   CREATE_BANK: '/admin/bank/create',
   UPDATE_BANK: `/admin/bank/edit/${ROUTE_PARAMS.id}`,
+  DELETE_BANK: `/admin/bank/delete/${ROUTE_PARAMS.id}`,
 };
 
 const VIEW_ROUTES = {

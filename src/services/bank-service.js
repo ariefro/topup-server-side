@@ -44,6 +44,16 @@ class BankService {
 
     return bank;
   };
+
+  static actionDelete = async ({ id }) => {
+    const bank = await Bank.findOneAndDelete({ _id: id });
+
+    if (!bank) {
+      throw new Error(ERRORS.NOT_FOUND);
+    }
+
+    return bank;
+  };
 }
 
 export default BankService;

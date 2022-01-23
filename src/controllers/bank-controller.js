@@ -61,6 +61,17 @@ class BankController {
       console.log(err);
     }
   };
+
+  static actionDelete = async (req, res) => {
+    try {
+      const { id } = req.params;
+      await BankService.actionDelete({ id });
+
+      res.redirect('/admin/bank');
+    } catch (err) {
+      console.log(err);
+    }
+  };
 }
 
 export default BankController;
