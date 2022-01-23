@@ -8,9 +8,15 @@ class BankController {
         name, bankName, noRekening,
       });
 
+      req.flash('alertMessage', 'Add data successfully');
+      req.flash('alertStatus', 'success');
+
       res.redirect('/admin/bank');
     } catch (err) {
-      console.log(err);
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/bank');
     }
   };
 
@@ -24,11 +30,18 @@ class BankController {
 
   static viewBank = async (req, res) => {
     try {
+      const alertMessage = req.flash('alertMessage');
+      const alertStatus = req.flash('alertStatus');
+      const alert = { message: alertMessage, status: alertStatus };
+
       const bank = await BankService.getAll();
 
-      res.render('admin/bank', { bank });
+      res.render('admin/bank', { bank, alert });
     } catch (err) {
-      console.log(err);
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/bank');
     }
   };
 
@@ -44,9 +57,14 @@ class BankController {
         noRekening,
       });
 
+      req.flash('alertMessage', 'Edit data successfully');
+      req.flash('alertStatus', 'success');
+
       res.redirect('/admin/bank');
     } catch (err) {
-      console.log(err);
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/bank');
     }
   };
 
@@ -65,7 +83,11 @@ class BankController {
   static actionDelete = async (req, res) => {
     try {
       const { id } = req.params;
+
       await BankService.actionDelete({ id });
+
+      req.flash('alertMessage', 'Delete data successfully');
+      req.flash('alertStatus', 'success');
 
       res.redirect('/admin/bank');
     } catch (err) {

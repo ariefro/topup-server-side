@@ -1,5 +1,4 @@
 import CategoryService from '../services/category-service';
-import Category from '../models/category';
 
 class CategoryController {
   static categoryView = async (req, res) => {
@@ -8,7 +7,7 @@ class CategoryController {
       const alertStatus = req.flash('alertStatus');
       const alert = { message: alertMessage, status: alertStatus };
 
-      const category = await Category.find();
+      const category = await CategoryService.getCategories();
       res.render('admin/category/index', { category, alert });
     } catch (err) {
       req.flash('alertMessage', `${err.message}`);
