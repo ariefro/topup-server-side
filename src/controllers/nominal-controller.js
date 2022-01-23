@@ -1,24 +1,20 @@
-import ERRORS from '../config/errors';
 import NominalService from '../services/nominal-service';
 
 class NominalController {
-  static getAllData = async (req, res) => {
-    const result = await NominalService.getAllNominal();
-    if (!result) {
-      throw new Error(ERRORS.NOT_FOUND);
-    }
-
-    res.status(200).json(result);
-  };
-
   static createNominal = async (req, res) => {
     try {
       const { coinName, coinQuantity, price } = req.body;
       await NominalService.createNominal({ coinName, coinQuantity, price });
 
+      req.flash('alertMessage', 'Add data successfully');
+      req.flash('alertStatus', 'success');
+
       res.redirect('/admin/nominal');
     } catch (err) {
-      console.log(err);
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/admin/nominal');
     }
   };
 
@@ -28,11 +24,18 @@ class NominalController {
 
   static GetAllNominal = async (req, res) => {
     try {
+      const alertMessage = req.flash('alertMessage');
+      const alertStatus = req.flash('alertStatus');
+      const alert = { message: alertMessage, status: alertStatus };
+
       const nominal = await NominalService.getAllNominal();
 
-      res.render('admin/nominal', { nominal });
+      res.render('admin/nominal', { nominal, alert });
     } catch (err) {
-      console.log(err);
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/admin/nominal');
     }
   };
 
@@ -40,13 +43,20 @@ class NominalController {
     try {
       const { id } = req.params;
       const { coinName, coinQuantity, price } = req.body;
+
       await NominalService.updateNominal({
         id, coinName, coinQuantity, price,
       });
 
+      req.flash('alertMessage', 'Edit data successfully');
+      req.flash('alertStatus', 'success');
+
       res.redirect('/admin/nominal');
     } catch (err) {
-      console.log(err);
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/admin/nominal');
     }
   };
 
@@ -66,9 +76,15 @@ class NominalController {
       const { id } = req.params;
       await NominalService.deleteNominal({ id });
 
+      req.flash('alertMessage', 'Delete data successfully');
+      req.flash('alertStatus', 'success');
+
       res.redirect('/admin/nominal');
     } catch (err) {
-      console.log(err);
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/admin/nominal');
     }
   };
 }
