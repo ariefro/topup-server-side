@@ -105,6 +105,24 @@ class PaymentController {
       res.redirect('/admin/payment');
     }
   };
+
+  static deletePayment = async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      await PaymentService.deletePayment({ id });
+
+      req.flash('alertMessage', 'Delete status successfully');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/admin/payment');
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/admin/payment');
+    }
+  };
 }
 
 export default PaymentController;

@@ -35,5 +35,6 @@ router.delete(API_ROUTES.DELETE_BANK, BankController.actionDelete);
 router.post(API_ROUTES.CREATE_PAYMENT, PaymentController.createPayment);
 router.put(API_ROUTES.UPDATE_PAYMENT, PaymentController.updatePayment);
 router.put(API_ROUTES.UPDATE_STATUS_PAYMENT, PaymentController.updateStatusPayment);
+router.delete(API_ROUTES.DELETE_PAYMENT, PaymentController.deletePayment);
 
 export default router;

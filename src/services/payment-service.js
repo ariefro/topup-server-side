@@ -61,6 +61,16 @@ class PaymentService {
 
     return payment;
   };
+
+  static deletePayment = async ({ id }) => {
+    const payment = await Payment.findOneAndDelete({ _id: id });
+
+    if (!payment) {
+      throw new Error(ERRORS.NOT_FOUND);
+    }
+
+    return payment;
+  };
 }
 
 export default PaymentService;
