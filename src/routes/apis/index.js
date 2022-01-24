@@ -5,6 +5,7 @@ import { API_ROUTES } from '..';
 import BankController from '../../controllers/bank-controller';
 import CategoryController from '../../controllers/category-controller';
 import NominalController from '../../controllers/nominal-controller';
+import PaymentController from '../../controllers/payment-controller';
 import VoucherController from '../../controllers/voucher-controller';
 
 const router = express.Router();
@@ -30,5 +31,7 @@ router.put(API_ROUTES.UPDATE_STATUS_VOUCHER, VoucherController.updateStatusVouch
 router.post(API_ROUTES.CREATE_BANK, BankController.actionCreate);
 router.put(API_ROUTES.UPDATE_BANK, BankController.actionUpdate);
 router.delete(API_ROUTES.DELETE_BANK, BankController.actionDelete);
+
+router.post(API_ROUTES.CREATE_PAYMENT, PaymentController.createPayment);
 
 export default router;
