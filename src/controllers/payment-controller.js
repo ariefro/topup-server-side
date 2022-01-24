@@ -1,4 +1,5 @@
 import Bank from '../models/bank';
+import Payment from '../models/payment';
 import PaymentService from '../services/payment-service';
 
 class PaymentController {
@@ -73,6 +74,27 @@ class PaymentController {
       await PaymentService.update({ id, type, banks });
 
       req.flash('alertMessage', 'Edit data successfully');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/admin/payment');
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/admin/payment');
+    }
+  };
+
+  static updateStatusPayment = async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      let payment = await PaymentService.getPaymentById({ id });
+      const status = payment.status === 'active' ? 'non active' : 'active';
+      payment = await PaymentService.updateStatusPayment({ id, status });
+      // payment = await Payment.findByIdAndUpdate({ _id: id }, { status });
+
+      req.flash('alertMessage', 'Edit status successfully');
       req.flash('alertStatus', 'success');
 
       res.redirect('/admin/payment');

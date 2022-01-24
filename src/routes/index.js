@@ -24,6 +24,7 @@ const API_ROUTES = {
   DELETE_BANK: `/admin/bank/delete/${ROUTE_PARAMS.id}`,
   CREATE_PAYMENT: '/admin/payment/create',
   UPDATE_PAYMENT: `/admin/payment/edit/${ROUTE_PARAMS.id}`,
+  UPDATE_STATUS_PAYMENT: `/admin/payment/status/${ROUTE_PARAMS.id}`,
 };
 
 const VIEW_ROUTES = {

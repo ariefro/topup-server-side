@@ -53,6 +53,14 @@ class PaymentService {
 
     return payment;
   };
+
+  static updateStatusPayment = async ({ id, status }) => {
+    const payment = await Payment.findOneAndUpdate({
+      _id: id,
+    }, { status });
+
+    return payment;
+  };
 }
 
 export default PaymentService;
