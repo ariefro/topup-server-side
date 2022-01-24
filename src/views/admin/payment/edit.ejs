@@ -13,7 +13,7 @@
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/admin">Home</a></li>
             <li class="breadcrumb-item"><a href="/admin/payment">Jenis pembayaran</a></li>
-            <li class="breadcrumb-item active">Tambah</li>
+            <li class="breadcrumb-item active">Edit</li>
           </ol>
         </div>
       </div>
@@ -27,16 +27,16 @@
         <div class="col-12">
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Form tambah jenis pembayaran</h3>
+              <h3 class="card-title">Form edit jenis pembayaran</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="/api/admin/payment/create" method="post">
+            <form action="/api/admin/payment/edit/<%= payment._id %>?_method=PUT" method="post">
               <div class="card-body">
                 <div class="form-group">
                   <div class="form-group">
                     <label for="type">Tipe</label>
-                    <input type="text" name="type" class="form-control" id="type" placeholder="Masukan jenis pembayaran" required>
+                    <input type="text" value="<%= payment.type %>" name="type" class="form-control" id="type" placeholder="Masukan jenis pembayaran" required>
                   </div>
                   <div class="form-grop">
                     <label>Bank</label>
@@ -49,7 +49,13 @@
                         name="banks"
                         required>
                         <% banks.forEach(bank => { %>
-                          <option value="<%= bank._id %>"><%= bank.name %> - <%= bank.bankName %> - <%= bank.noRekening %></option>
+                          <option value="<%= bank._id %>"
+                            <% if (bank._id.toString() === payment.banks.toString()) { %>
+                              selected
+                            <% } %>
+                          >
+                            <%= bank.name %> - <%= bank.bankName %> - <%= bank.noRekening %>
+                          </option>
                         <% }) %>
                       </select>
                     </div>

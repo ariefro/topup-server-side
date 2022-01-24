@@ -23,6 +23,7 @@ const API_ROUTES = {
   UPDATE_BANK: `/admin/bank/edit/${ROUTE_PARAMS.id}`,
   DELETE_BANK: `/admin/bank/delete/${ROUTE_PARAMS.id}`,
   CREATE_PAYMENT: '/admin/payment/create',
+  UPDATE_PAYMENT: `/admin/payment/edit/${ROUTE_PARAMS.id}`,
 };
 
 const VIEW_ROUTES = {
@@ -42,6 +43,7 @@ const VIEW_ROUTES = {
   UPDATE_BANK: `/admin/bank/edit/${ROUTE_PARAMS.id}`,
   CREATE_PAYMENT: '/admin/payment/create',
   PAYMENT: '/admin/payment',
+  UPDATE_PAYMENT: `/admin/payment/edit/${ROUTE_PARAMS.id}`,
 };
 
 export { API_ROUTES, VIEW_ROUTES };

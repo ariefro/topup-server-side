@@ -1,3 +1,4 @@
+import Bank from '../models/bank';
 import PaymentService from '../services/payment-service';
 
 class PaymentController {
@@ -41,6 +42,40 @@ class PaymentController {
       const payment = await PaymentService.getPayment();
 
       res.render('admin/payment', { alert, payment });
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/admin/payment');
+    }
+  };
+
+  static formUpdatePayment = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const payment = await PaymentService.getPaymentById({ id });
+      const banks = await Bank.find();
+
+      res.render('admin/payment/edit', { payment, banks });
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`);
+      req.flash('alertStatus', 'danger');
+
+      res.redirect('/admin/payment');
+    }
+  };
+
+  static updatePayment = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { type, banks } = req.body;
+
+      await PaymentService.update({ id, type, banks });
+
+      req.flash('alertMessage', 'Edit data successfully');
+      req.flash('alertStatus', 'success');
+
+      res.redirect('/admin/payment');
     } catch (err) {
       req.flash('alertMessage', `${err.message}`);
       req.flash('alertStatus', 'danger');

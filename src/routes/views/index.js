@@ -31,5 +31,6 @@ router.get(VIEW_ROUTES.UPDATE_BANK, BankController.formUpdate);
 
 router.get(VIEW_ROUTES.PAYMENT, PaymentController.viewPayment);
 router.get(VIEW_ROUTES.CREATE_PAYMENT, PaymentController.formCreatePayment);
+router.get(VIEW_ROUTES.UPDATE_PAYMENT, PaymentController.formUpdatePayment);
 
 export default router;
