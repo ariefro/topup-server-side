@@ -10,10 +10,10 @@ const paymentSchema = Schema({
     enum: ['active', 'non active'],
     default: 'active',
   },
-  banks: {
+  banks: [{
     type: Schema.Types.ObjectId,
     ref: 'Bank',
-  },
+  }],
 });
 
 const Payment = model('Payment', paymentSchema);
