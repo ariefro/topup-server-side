@@ -5,6 +5,7 @@ import BankController from '../../controllers/bank-controller';
 import CategoryController from '../../controllers/category-controller';
 import NominalController from '../../controllers/nominal-controller';
 import PaymentController from '../../controllers/payment-controller';
+import UserController from '../../controllers/user-controller';
 import VoucherController from '../../controllers/voucher-controller';
 
 const router = express.Router();
@@ -32,5 +33,7 @@ router.get(VIEW_ROUTES.UPDATE_BANK, BankController.formUpdate);
 router.get(VIEW_ROUTES.PAYMENT, PaymentController.viewPayment);
 router.get(VIEW_ROUTES.CREATE_PAYMENT, PaymentController.formCreatePayment);
 router.get(VIEW_ROUTES.UPDATE_PAYMENT, PaymentController.formUpdatePayment);
+
+router.get(VIEW_ROUTES.LOGIN, UserController.loginView);
 
 export default router;

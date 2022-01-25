@@ -1,5 +1,4 @@
 import Bank from '../models/bank';
-import Payment from '../models/payment';
 import PaymentService from '../services/payment-service';
 
 class PaymentController {

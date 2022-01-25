@@ -46,6 +46,7 @@ const VIEW_ROUTES = {
   CREATE_PAYMENT: '/admin/payment/create',
   PAYMENT: '/admin/payment',
   UPDATE_PAYMENT: `/admin/payment/edit/${ROUTE_PARAMS.id}`,
+  LOGIN: '/admin/login',
 };
 
 export { API_ROUTES, VIEW_ROUTES };
