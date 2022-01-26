@@ -9,7 +9,7 @@ const userSchema = Schema({
     type: String,
     require: [true, 'password harus diisi'],
   },
-  nama: {
+  name: {
     type: String,
     require: [true, 'nama harus diisi'],
   },
@@ -27,7 +27,7 @@ const userSchema = Schema({
     enum: ['active', 'non active'],
     default: 'active',
   },
-});
+}, { timestamps: true });
 
 const User = model('User', userSchema);
 

@@ -13,7 +13,7 @@ const bankSchema = Schema({
     type: String,
     require: [true, 'Nomor rekening harus diisi'],
   },
-});
+}, { timestamps: true });
 
 const Bank = model('Bank', bankSchema);
 

@@ -25,7 +25,7 @@ const voucherSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-});
+}, { timestamps: true });
 
 const Voucher = model('Voucher', voucherSchema);
 
