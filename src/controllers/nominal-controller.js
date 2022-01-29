@@ -19,7 +19,10 @@ class NominalController {
   };
 
   static formCreateNominalView = (req, res) => {
-    res.render('admin/nominal/create');
+    res.render('admin/nominal/create', {
+      name: req.session.user.name,
+      title: 'Nominal',
+    });
   };
 
   static GetAllNominal = async (req, res) => {
@@ -30,7 +33,12 @@ class NominalController {
 
       const nominal = await NominalService.getAllNominal();
 
-      res.render('admin/nominal', { nominal, alert });
+      res.render('admin/nominal', {
+        nominal,
+        alert,
+        name: req.session.user.name,
+        title: 'Nominal',
+      });
     } catch (err) {
       req.flash('alertMessage', `${err.message}`);
       req.flash('alertStatus', 'danger');
@@ -65,7 +73,11 @@ class NominalController {
       const { id } = req.params;
       const nominal = await NominalService.getById({ id });
 
-      res.render('admin/nominal/edit', { nominal });
+      res.render('admin/nominal/edit', {
+        nominal,
+        name: req.session.user.name,
+        title: 'Nominal',
+      });
     } catch (err) {
       console.log(err);
     }

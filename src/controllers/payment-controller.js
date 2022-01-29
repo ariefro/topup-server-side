@@ -24,7 +24,11 @@ class PaymentController {
     try {
       const banks = await PaymentService.getBanks();
 
-      res.render('admin/payment/create', { banks });
+      res.render('admin/payment/create', {
+        banks,
+        name: req.session.user.name,
+        title: 'Payment',
+      });
     } catch (err) {
       req.flash('alertMessage', `${err.message}`);
       req.flash('alertStatus', 'danger');
@@ -41,7 +45,12 @@ class PaymentController {
 
       const payment = await PaymentService.getPayment();
 
-      res.render('admin/payment', { alert, payment });
+      res.render('admin/payment', {
+        alert,
+        payment,
+        name: req.session.user.name,
+        title: 'Payment',
+      });
     } catch (err) {
       req.flash('alertMessage', `${err.message}`);
       req.flash('alertStatus', 'danger');
@@ -56,7 +65,12 @@ class PaymentController {
       const payment = await PaymentService.getPaymentById({ id });
       const banks = await Bank.find();
 
-      res.render('admin/payment/edit', { payment, banks });
+      res.render('admin/payment/edit', {
+        payment,
+        banks,
+        name: req.session.user.name,
+        title: 'Payment',
+      });
     } catch (err) {
       req.flash('alertMessage', `${err.message}`);
       req.flash('alertStatus', 'danger');

@@ -8,7 +8,12 @@ class CategoryController {
       const alert = { message: alertMessage, status: alertStatus };
 
       const category = await CategoryService.getCategories();
-      res.render('admin/category/index', { category, alert });
+      res.render('admin/category/index', {
+        category,
+        alert,
+        name: req.session.user.name,
+        title: 'Category',
+      });
     } catch (err) {
       req.flash('alertMessage', `${err.message}`);
       req.flash('alertStatus', 'danger');
@@ -17,7 +22,10 @@ class CategoryController {
   };
 
   static formCreateCategoryView = (req, res) => {
-    res.render('admin/category/create');
+    res.render('admin/category/create', {
+      name: req.session.user.name,
+      title: 'Category',
+    });
   };
 
   static getCategories = async (req, res) => {
@@ -62,7 +70,11 @@ class CategoryController {
       const { id } = req.params;
       const category = await CategoryService.getCategoryById({ id });
 
-      res.render('admin/category/edit', { category });
+      res.render('admin/category/edit', {
+        category,
+        name: req.session.user.name,
+        title: 'Category',
+      });
     } catch (err) {
       console.log(err);
     }

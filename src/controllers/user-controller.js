@@ -9,7 +9,7 @@ class UserController {
       const alert = { message: alertMessage, status: alertStatus };
 
       if (req.session.user === null || req.session.user === undefined) {
-        res.render('admin/user', { alert });
+        res.redirect('/admin/login', { alert });
       } else {
         res.redirect('/dashboard');
       }

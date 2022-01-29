@@ -22,7 +22,10 @@ class BankController {
 
   static formCreate = async (req, res) => {
     try {
-      res.render('admin/bank/create');
+      res.render('admin/bank/create', {
+        name: req.session.user.name,
+        title: 'Bank',
+      });
     } catch (err) {
       console.log(err);
     }
@@ -36,7 +39,12 @@ class BankController {
 
       const bank = await BankService.getAll();
 
-      res.render('admin/bank', { bank, alert });
+      res.render('admin/bank', {
+        bank,
+        alert,
+        name: req.session.user.name,
+        title: 'Bank',
+      });
     } catch (err) {
       req.flash('alertMessage', `${err.message}`);
       req.flash('alertStatus', 'danger');
@@ -74,7 +82,11 @@ class BankController {
 
       const bank = await BankService.getById({ id });
 
-      res.render('admin/bank/edit', { bank });
+      res.render('admin/bank/edit', {
+        bank,
+        name: req.session.user.name,
+        title: 'Bank',
+      });
     } catch (err) {
       console.log(err);
     }
