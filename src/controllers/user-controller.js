@@ -60,6 +60,11 @@ class UserController {
       res.redirect('/');
     }
   };
+
+  static logout = async (req, res) => {
+    req.session.destroy();
+    res.redirect('/admin/login');
+  };
 }
 
 export default UserController;

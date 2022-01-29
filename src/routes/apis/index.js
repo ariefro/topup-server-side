@@ -38,6 +38,7 @@ router.put(API_ROUTES.UPDATE_PAYMENT, PaymentController.updatePayment);
 router.put(API_ROUTES.UPDATE_STATUS_PAYMENT, PaymentController.updateStatusPayment);
 router.delete(API_ROUTES.DELETE_PAYMENT, PaymentController.deletePayment);
 
-router.post(API_ROUTES.SIGN_IN, UserController.login);
+router.post(API_ROUTES.LOGIN, UserController.login);
+router.get(API_ROUTES.LOGOUT, UserController.logout);
 
 export default router;
