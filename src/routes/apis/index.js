@@ -6,6 +6,7 @@ import BankController from '../../controllers/bank-controller';
 import CategoryController from '../../controllers/category-controller';
 import NominalController from '../../controllers/nominal-controller';
 import PaymentController from '../../controllers/payment-controller';
+import UserController from '../../controllers/user-controller';
 import VoucherController from '../../controllers/voucher-controller';
 
 const router = express.Router();
@@ -36,5 +37,7 @@ router.post(API_ROUTES.CREATE_PAYMENT, PaymentController.createPayment);
 router.put(API_ROUTES.UPDATE_PAYMENT, PaymentController.updatePayment);
 router.put(API_ROUTES.UPDATE_STATUS_PAYMENT, PaymentController.updateStatusPayment);
 router.delete(API_ROUTES.DELETE_PAYMENT, PaymentController.deletePayment);
+
+router.post(API_ROUTES.SIGN_IN, UserController.login);
 
 export default router;

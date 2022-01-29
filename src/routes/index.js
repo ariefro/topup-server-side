@@ -26,11 +26,12 @@ const API_ROUTES = {
   UPDATE_PAYMENT: `/admin/payment/edit/${ROUTE_PARAMS.id}`,
   UPDATE_STATUS_PAYMENT: `/admin/payment/status/${ROUTE_PARAMS.id}`,
   DELETE_PAYMENT: `/admin/payment/delete/${ROUTE_PARAMS.id}`,
+  SIGN_IN: '/admin/login',
 };
 
 const VIEW_ROUTES = {
   ROOT: '/',
-  ADMIN: '/admin',
+  DASHBOARD: '/dashboard',
   CATEGORY: '/admin/category',
   CREATE_CATEGORY: '/admin/category/create',
   UPDATE_CATEGORY: `/admin/category/edit/${ROUTE_PARAMS.id}`,

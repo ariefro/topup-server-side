@@ -7,33 +7,34 @@ import NominalController from '../../controllers/nominal-controller';
 import PaymentController from '../../controllers/payment-controller';
 import UserController from '../../controllers/user-controller';
 import VoucherController from '../../controllers/voucher-controller';
+import { isLogin } from '../../middlewares/auth';
 
 const router = express.Router();
 
-router.get(VIEW_ROUTES.ADMIN, AdminController.dashboardView);
+router.get(VIEW_ROUTES.DASHBOARD, AdminController.dashboardView);
 
-router.get(VIEW_ROUTES.CATEGORY, CategoryController.categoryView);
-router.get(VIEW_ROUTES.CREATE_CATEGORY, CategoryController.formCreateCategoryView);
-router.get(VIEW_ROUTES.UPDATE_CATEGORY, CategoryController.formUpdateCategoryView);
-router.get(VIEW_ROUTES.UPDATE_CATEGORY, CategoryController.updateCategory);
+router.get(VIEW_ROUTES.CATEGORY, [isLogin], CategoryController.categoryView);
+router.get(VIEW_ROUTES.CREATE_CATEGORY, [isLogin], CategoryController.formCreateCategoryView);
+router.get(VIEW_ROUTES.UPDATE_CATEGORY, [isLogin], CategoryController.formUpdateCategoryView);
+router.get(VIEW_ROUTES.UPDATE_CATEGORY, [isLogin], CategoryController.updateCategory);
 
-router.get(VIEW_ROUTES.NOMINAL, NominalController.GetAllNominal);
-router.get(VIEW_ROUTES.CREATE_NOMINAL, NominalController.formCreateNominalView);
-router.get(VIEW_ROUTES.UPDATE_NOMINAL, NominalController.formUpdateNominal);
-router.get(VIEW_ROUTES.UPDATE_NOMINAL, NominalController.updateNominal);
+router.get(VIEW_ROUTES.NOMINAL, [isLogin], NominalController.GetAllNominal);
+router.get(VIEW_ROUTES.CREATE_NOMINAL, [isLogin], NominalController.formCreateNominalView);
+router.get(VIEW_ROUTES.UPDATE_NOMINAL, [isLogin], NominalController.formUpdateNominal);
+router.get(VIEW_ROUTES.UPDATE_NOMINAL, [isLogin], NominalController.updateNominal);
 
-router.get(VIEW_ROUTES.VOUCHER, VoucherController.viewVoucher);
-router.get(VIEW_ROUTES.CREATE_VOUCHER, VoucherController.formCreateVoucher);
-router.get(VIEW_ROUTES.UPDATE_VOUCHER, VoucherController.formEditVoucher);
+router.get(VIEW_ROUTES.VOUCHER, [isLogin], VoucherController.viewVoucher);
+router.get(VIEW_ROUTES.CREATE_VOUCHER, [isLogin], VoucherController.formCreateVoucher);
+router.get(VIEW_ROUTES.UPDATE_VOUCHER, [isLogin], VoucherController.formEditVoucher);
 
-router.get(VIEW_ROUTES.BANK, BankController.viewBank);
-router.get(VIEW_ROUTES.CREATE_BANK, BankController.formCreate);
-router.get(VIEW_ROUTES.UPDATE_BANK, BankController.formUpdate);
+router.get(VIEW_ROUTES.BANK, [isLogin], BankController.viewBank);
+router.get(VIEW_ROUTES.CREATE_BANK, [isLogin], BankController.formCreate);
+router.get(VIEW_ROUTES.UPDATE_BANK, [isLogin], BankController.formUpdate);
 
-router.get(VIEW_ROUTES.PAYMENT, PaymentController.viewPayment);
-router.get(VIEW_ROUTES.CREATE_PAYMENT, PaymentController.formCreatePayment);
-router.get(VIEW_ROUTES.UPDATE_PAYMENT, PaymentController.formUpdatePayment);
+router.get(VIEW_ROUTES.PAYMENT, [isLogin], PaymentController.viewPayment);
+router.get(VIEW_ROUTES.CREATE_PAYMENT, [isLogin], PaymentController.formCreatePayment);
+router.get(VIEW_ROUTES.UPDATE_PAYMENT, [isLogin], PaymentController.formUpdatePayment);
 
-router.get(VIEW_ROUTES.LOGIN, UserController.loginView);
+router.get(VIEW_ROUTES.LOGIN, [isLogin], UserController.loginView);
 
 export default router;
