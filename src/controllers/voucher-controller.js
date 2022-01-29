@@ -15,7 +15,12 @@ class VoucherController {
 
       const voucher = await VoucherService.getAllVoucher();
 
-      res.render('admin/voucher', { voucher, alert });
+      res.render('admin/voucher', {
+        voucher,
+        alert,
+        name: req.session.user.name,
+        title: 'Voucher',
+      });
     } catch (err) {
       req.flash('alertMessage', `${err.message}`);
       req.flash('alertStatus', 'danger');
@@ -50,7 +55,12 @@ class VoucherController {
       const category = await Category.find();
       const nominal = await Nominal.find();
 
-      res.render('admin/voucher/create', { category, nominal });
+      res.render('admin/voucher/create', {
+        category,
+        nominal,
+        name: req.session.user.name,
+        title: 'Voucher',
+      });
     } catch (err) {
       console.log(err);
     }
@@ -119,7 +129,13 @@ class VoucherController {
       const category = await Category.find();
       const nominal = await Nominal.find();
 
-      res.render('admin/voucher/edit', { voucher, category, nominal });
+      res.render('admin/voucher/edit', {
+        voucher,
+        category,
+        nominal,
+        name: req.session.user.name,
+        title: 'Voucher',
+      });
     } catch (err) {
       console.log(err);
     }

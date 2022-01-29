@@ -14,7 +14,7 @@ const paymentSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'Bank',
   }],
-});
+}, { timestamps: true });
 
 const Payment = model('Payment', paymentSchema);
 

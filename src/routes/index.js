@@ -26,11 +26,13 @@ const API_ROUTES = {
   UPDATE_PAYMENT: `/admin/payment/edit/${ROUTE_PARAMS.id}`,
   UPDATE_STATUS_PAYMENT: `/admin/payment/status/${ROUTE_PARAMS.id}`,
   DELETE_PAYMENT: `/admin/payment/delete/${ROUTE_PARAMS.id}`,
+  LOGIN: '/admin/login',
+  LOGOUT: '/admin/logout',
 };
 
 const VIEW_ROUTES = {
   ROOT: '/',
-  ADMIN: '/admin',
+  DASHBOARD: '/dashboard',
   CATEGORY: '/admin/category',
   CREATE_CATEGORY: '/admin/category/create',
   UPDATE_CATEGORY: `/admin/category/edit/${ROUTE_PARAMS.id}`,
@@ -46,6 +48,7 @@ const VIEW_ROUTES = {
   CREATE_PAYMENT: '/admin/payment/create',
   PAYMENT: '/admin/payment',
   UPDATE_PAYMENT: `/admin/payment/edit/${ROUTE_PARAMS.id}`,
+  LOGIN: '/admin/login',
 };
 
 export { API_ROUTES, VIEW_ROUTES };

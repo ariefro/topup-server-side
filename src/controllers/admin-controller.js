@@ -1,6 +1,9 @@
 class AdminController {
   static dashboardView = (req, res) => {
-    res.render('index');
+    res.render('index', {
+      name: req.session.user.name,
+      title: 'Dashboard',
+    });
   };
 }
 
