@@ -238,7 +238,7 @@ class VoucherController {
 
       voucher = await Voucher.findByIdAndUpdate({ _id: id }, { status });
 
-      req.flash('alertMessage', 'Edit status successfully');
+      req.flash('alertMessage', 'Update status successfully');
       req.flash('alertStatus', 'success');
 
       res.redirect('/admin/voucher');

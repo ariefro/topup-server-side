@@ -6,6 +6,7 @@ import BankController from '../../controllers/bank-controller';
 import CategoryController from '../../controllers/category-controller';
 import NominalController from '../../controllers/nominal-controller';
 import PaymentController from '../../controllers/payment-controller';
+import TransactionController from '../../controllers/transaction-controller';
 import UserController from '../../controllers/user-controller';
 import VoucherController from '../../controllers/voucher-controller';
 
@@ -37,6 +38,8 @@ router.post(API_ROUTES.CREATE_PAYMENT, PaymentController.createPayment);
 router.put(API_ROUTES.UPDATE_PAYMENT, PaymentController.updatePayment);
 router.put(API_ROUTES.UPDATE_STATUS_PAYMENT, PaymentController.updateStatusPayment);
 router.delete(API_ROUTES.DELETE_PAYMENT, PaymentController.deletePayment);
+
+router.put(API_ROUTES.UPDATE_STATUS_TRANSACTION, TransactionController.updateStatus);
 
 router.post(API_ROUTES.LOGIN, UserController.login);
 router.get(API_ROUTES.LOGOUT, UserController.logout);
