@@ -5,11 +5,14 @@ import BankController from '../../controllers/bank-controller';
 import CategoryController from '../../controllers/category-controller';
 import NominalController from '../../controllers/nominal-controller';
 import PaymentController from '../../controllers/payment-controller';
+import TransactionController from '../../controllers/transaction-controller';
 import UserController from '../../controllers/user-controller';
 import VoucherController from '../../controllers/voucher-controller';
 import { isLogin } from '../../middlewares/auth';
 
 const router = express.Router();
+
+router.get(VIEW_ROUTES.LOGIN, [isLogin], UserController.loginView);
 
 router.get(VIEW_ROUTES.DASHBOARD, AdminController.dashboardView);
 
@@ -35,6 +38,6 @@ router.get(VIEW_ROUTES.PAYMENT, [isLogin], PaymentController.viewPayment);
 router.get(VIEW_ROUTES.CREATE_PAYMENT, [isLogin], PaymentController.formCreatePayment);
 router.get(VIEW_ROUTES.UPDATE_PAYMENT, [isLogin], PaymentController.formUpdatePayment);
 
-router.get(VIEW_ROUTES.LOGIN, [isLogin], UserController.loginView);
+router.get(VIEW_ROUTES.TRANSACTION, [isLogin], TransactionController.viewTransaction);
 
 export default router;
