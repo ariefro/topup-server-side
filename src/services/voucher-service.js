@@ -2,17 +2,17 @@ import ERRORS from '../config/errors';
 import Voucher from '../models/voucher';
 
 class VoucherService {
-  static createVoucher = async ({ name, category, nominal }) => {
-    if (!name || !category || !nominal) {
+  static createVoucher = async ({ name, category, nominals }) => {
+    if (!name || !category || !nominals) {
       throw new Error(ERRORS.INCOMPLETE_INPUT);
     }
-    const voucher = await Voucher.create({ name, category, nominal });
+    const voucher = await Voucher.create({ name, category, nominals });
 
     return voucher;
   };
 
   static getAllVoucher = async () => {
-    const voucher = await Voucher.find().populate('category').populate('nominal');
+    const voucher = await Voucher.find().populate('category').populate('nominals');
 
     return voucher;
   };
@@ -31,13 +31,13 @@ class VoucherService {
     id,
     name,
     category,
-    nominal,
+    nominals,
   }) => {
     const voucher = await Voucher.findOneAndUpdate({
       _id: id,
-    }, { name, category, nominal });
+    }, { name, category, nominals });
 
-    if (!name || !category || !nominal) {
+    if (!name || !category || !nominals) {
       throw new Error(ERRORS.INCOMPLETE_INPUT);
     }
 

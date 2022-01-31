@@ -9,6 +9,7 @@ import PaymentController from '../../controllers/payment-controller';
 import TransactionController from '../../controllers/transaction-controller';
 import UserController from '../../controllers/user-controller';
 import VoucherController from '../../controllers/voucher-controller';
+import PlayerController from '../../controllers/player-controller';
 
 const router = express.Router();
 
@@ -43,5 +44,7 @@ router.put(API_ROUTES.UPDATE_STATUS_TRANSACTION, TransactionController.updateSta
 
 router.post(API_ROUTES.LOGIN, UserController.login);
 router.get(API_ROUTES.LOGOUT, UserController.logout);
+
+router.get(API_ROUTES.LANDING_PAGE, PlayerController.landingPage);
 
 export default router;

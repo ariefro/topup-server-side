@@ -17,7 +17,7 @@ const voucherSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'Category',
   },
-  nominal: [{
+  nominals: [{
     type: Schema.Types.ObjectId,
     ref: 'Nominal',
   }],

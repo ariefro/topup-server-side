@@ -62,11 +62,11 @@
                       multiple="multiple"
                       style="width: 100%;"
                       data-placeholder="-- pilih nominal --"
-                      name="nominal"
+                      name="nominals"
                       required>
                       <% nominal.forEach(nominal => { %>
                         <option value="<%= nominal._id %>"
-                          <% if (nominal._id.toString() === voucher.nominal.toString()) { %>
+                          <% if (nominal._id.toString() === voucher.nominals.toString()) { %>
                             selected
                           <% } %>
                         >
