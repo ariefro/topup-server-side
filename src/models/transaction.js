@@ -49,7 +49,7 @@ const transactionSchema = Schema({
 
   player: {
     type: Schema.Types.ObjectId,
-    ref: 'player',
+    ref: 'Player',
   },
 
   historyUser: {
