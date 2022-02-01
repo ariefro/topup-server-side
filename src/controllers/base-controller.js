@@ -19,6 +19,10 @@ class BaseController {
         code: 400,
         message: 'Email or Password does not match',
       };
+      case ERRORS.VALIDATION_ERROR: return {
+        code: 422,
+        message: 'Validation error',
+      };
       default: return {
         code: 500,
         message: 'Internal server error',

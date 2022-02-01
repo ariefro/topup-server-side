@@ -1,4 +1,5 @@
 import ERRORS from '../config/errors';
+import Player from '../models/player';
 import Voucher from '../models/voucher';
 
 class PlayerService {
@@ -10,6 +11,19 @@ class PlayerService {
     }
 
     return players;
+  };
+
+  static detailPage = async ({ id }) => {
+    const voucher = await Voucher.findOne({ _id: id })
+      .populate('category')
+      .populate('nominals')
+      .populate('user', '_id name phoneNumber');
+
+    if (!voucher) {
+      throw new Error(ERRORS.NOT_FOUND);
+    }
+
+    return voucher;
   };
 }
 

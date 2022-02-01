@@ -29,7 +29,9 @@ const API_ROUTES = {
   LOGIN: '/admin/login',
   LOGOUT: '/admin/logout',
   UPDATE_STATUS_TRANSACTION: `/admin/transaction/status/${ROUTE_PARAMS.id}`,
-  LANDING_PAGE: '/landingpage',
+  LANDING_PAGE: '/landing-page',
+  DETAIL_PAGE: `/detail-page/${ROUTE_PARAMS.id}`,
+  REGISTER: '/register',
 };
 
 const VIEW_ROUTES = {
