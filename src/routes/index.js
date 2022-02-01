@@ -35,6 +35,7 @@ const API_ROUTES = {
   CATEGORY: '/category',
   LOGIN: '/login',
   CHECKOUT: '/checkout',
+  HISTORY: '/history',
 };
 
 const VIEW_ROUTES = {

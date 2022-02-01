@@ -52,5 +52,6 @@ router.post(API_ROUTES.REGISTER, multer({ dest: os.tmpdir() }).single('image'), 
 router.get(API_ROUTES.CATEGORY, PlayerController.getCategories);
 router.post(API_ROUTES.LOGIN, PlayerController.login);
 router.post(API_ROUTES.CHECKOUT, [Auth.isLoginPlayer], PlayerController.checkout);
+router.get(API_ROUTES.HISTORY, [Auth.isLoginPlayer], PlayerController.history);
 
 export default router;

@@ -4,6 +4,7 @@ import Category from '../models/category';
 import Nominal from '../models/nominal';
 import Payment from '../models/payment';
 import Player from '../models/player';
+import Transaction from '../models/transaction';
 import Voucher from '../models/voucher';
 
 class PlayerService {
@@ -74,6 +75,12 @@ class PlayerService {
     const getBank = await Bank.findOne({ _id: bank });
 
     return getBank;
+  };
+
+  static getTransaction = async () => {
+    const transaction = await Transaction.find();
+
+    return transaction;
   };
 }
 
