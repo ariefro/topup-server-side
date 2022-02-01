@@ -55,7 +55,7 @@
                         multiple="multiple"
                         style="width: 100%;"
                         data-placeholder="-- pilih nominal --"
-                        name="nominal"
+                        name="nominals"
                         required>
                         <% nominal.forEach(nominal => { %>
                           <option value="<%= nominal._id %>"><%= nominal.coinName %> <%= nominal.price %></option>

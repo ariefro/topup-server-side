@@ -1,4 +1,7 @@
 import { Schema, model } from 'mongoose';
+import bcrypt from 'bcrypt';
+
+const hashRound = 10;
 
 const playerSchema = Schema({
   email: {
@@ -54,6 +57,16 @@ const playerSchema = Schema({
     ref: 'Category',
   },
 }, { timestamps: true });
+
+playerSchema.path('email').validate(async function validate(value) {
+  const count = await this.model('Player').countDocuments({ email: value });
+  return !count;
+}, (attr) => `${attr.value} registered`);
+
+playerSchema.pre('save', function hashPassword(next) {
+  this.password = bcrypt.hashSync(this.password, hashRound);
+  next();
+});
 
 const Player = model('Player', playerSchema);
 

@@ -26,9 +26,15 @@ const API_ROUTES = {
   UPDATE_PAYMENT: `/admin/payment/edit/${ROUTE_PARAMS.id}`,
   UPDATE_STATUS_PAYMENT: `/admin/payment/status/${ROUTE_PARAMS.id}`,
   DELETE_PAYMENT: `/admin/payment/delete/${ROUTE_PARAMS.id}`,
-  LOGIN: '/admin/login',
+  LOGIN_ADMIN: '/admin/login',
   LOGOUT: '/admin/logout',
   UPDATE_STATUS_TRANSACTION: `/admin/transaction/status/${ROUTE_PARAMS.id}`,
+  LANDING_PAGE: '/landing-page',
+  DETAIL_PAGE: `/detail-page/${ROUTE_PARAMS.id}`,
+  REGISTER: '/register',
+  CATEGORY: '/category',
+  LOGIN: '/login',
+  CHECKOUT: '/checkout',
 };
 
 const VIEW_ROUTES = {

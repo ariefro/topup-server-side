@@ -27,8 +27,8 @@ const transactionSchema = Schema({
   accountUser: {
     type: String,
     require: [true, 'nama akun harus diisi'],
-    maxlength: [225, 'panjang nama harus diantara 9-225 karakter'],
-    minlength: [9, 'panjang nama harus diantara 9-225 karakter'],
+    maxlength: [225, 'panjang nama harus diantara 5-225 karakter'],
+    minlength: [5, 'panjang nama harus diantara 5-225 karakter'],
   },
 
   tax: {
@@ -49,7 +49,7 @@ const transactionSchema = Schema({
 
   player: {
     type: Schema.Types.ObjectId,
-    ref: 'player',
+    ref: 'Player',
   },
 
   historyUser: {
@@ -67,7 +67,7 @@ const transactionSchema = Schema({
     ref: 'Category',
   },
 
-  User: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },

@@ -3,7 +3,7 @@ import Transaction from '../models/transaction';
 
 class TransactionService {
   static getTransaction = async () => {
-    const transaction = await Transaction.find();
+    const transaction = await Transaction.find().populate('player');
 
     if (!transaction) {
       throw new Error(ERRORS.NOT_FOUND);

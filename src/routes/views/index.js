@@ -8,36 +8,36 @@ import PaymentController from '../../controllers/payment-controller';
 import TransactionController from '../../controllers/transaction-controller';
 import UserController from '../../controllers/user-controller';
 import VoucherController from '../../controllers/voucher-controller';
-import { isLogin } from '../../middlewares/auth';
+import Auth from '../../middlewares/auth';
 
 const router = express.Router();
 
-router.get(VIEW_ROUTES.LOGIN, [isLogin], UserController.loginView);
+router.get(VIEW_ROUTES.LOGIN, [Auth.isLoginAdmin], UserController.loginView);
 
 router.get(VIEW_ROUTES.DASHBOARD, AdminController.dashboardView);
 
-router.get(VIEW_ROUTES.CATEGORY, [isLogin], CategoryController.categoryView);
-router.get(VIEW_ROUTES.CREATE_CATEGORY, [isLogin], CategoryController.formCreateCategoryView);
-router.get(VIEW_ROUTES.UPDATE_CATEGORY, [isLogin], CategoryController.formUpdateCategoryView);
-router.get(VIEW_ROUTES.UPDATE_CATEGORY, [isLogin], CategoryController.updateCategory);
+router.get(VIEW_ROUTES.CATEGORY, [Auth.isLoginAdmin], CategoryController.categoryView);
+router.get(VIEW_ROUTES.CREATE_CATEGORY, [Auth.isLoginAdmin], CategoryController.formCreateCategoryView);
+router.get(VIEW_ROUTES.UPDATE_CATEGORY, [Auth.isLoginAdmin], CategoryController.formUpdateCategoryView);
+router.get(VIEW_ROUTES.UPDATE_CATEGORY, [Auth.isLoginAdmin], CategoryController.updateCategory);
 
-router.get(VIEW_ROUTES.NOMINAL, [isLogin], NominalController.GetAllNominal);
-router.get(VIEW_ROUTES.CREATE_NOMINAL, [isLogin], NominalController.formCreateNominalView);
-router.get(VIEW_ROUTES.UPDATE_NOMINAL, [isLogin], NominalController.formUpdateNominal);
-router.get(VIEW_ROUTES.UPDATE_NOMINAL, [isLogin], NominalController.updateNominal);
+router.get(VIEW_ROUTES.NOMINAL, [Auth.isLoginAdmin], NominalController.GetAllNominal);
+router.get(VIEW_ROUTES.CREATE_NOMINAL, [Auth.isLoginAdmin], NominalController.formCreateNominalView);
+router.get(VIEW_ROUTES.UPDATE_NOMINAL, [Auth.isLoginAdmin], NominalController.formUpdateNominal);
+router.get(VIEW_ROUTES.UPDATE_NOMINAL, [Auth.isLoginAdmin], NominalController.updateNominal);
 
-router.get(VIEW_ROUTES.VOUCHER, [isLogin], VoucherController.viewVoucher);
-router.get(VIEW_ROUTES.CREATE_VOUCHER, [isLogin], VoucherController.formCreateVoucher);
-router.get(VIEW_ROUTES.UPDATE_VOUCHER, [isLogin], VoucherController.formEditVoucher);
+router.get(VIEW_ROUTES.VOUCHER, [Auth.isLoginAdmin], VoucherController.viewVoucher);
+router.get(VIEW_ROUTES.CREATE_VOUCHER, [Auth.isLoginAdmin], VoucherController.formCreateVoucher);
+router.get(VIEW_ROUTES.UPDATE_VOUCHER, [Auth.isLoginAdmin], VoucherController.formEditVoucher);
 
-router.get(VIEW_ROUTES.BANK, [isLogin], BankController.viewBank);
-router.get(VIEW_ROUTES.CREATE_BANK, [isLogin], BankController.formCreate);
-router.get(VIEW_ROUTES.UPDATE_BANK, [isLogin], BankController.formUpdate);
+router.get(VIEW_ROUTES.BANK, [Auth.isLoginAdmin], BankController.viewBank);
+router.get(VIEW_ROUTES.CREATE_BANK, [Auth.isLoginAdmin], BankController.formCreate);
+router.get(VIEW_ROUTES.UPDATE_BANK, [Auth.isLoginAdmin], BankController.formUpdate);
 
-router.get(VIEW_ROUTES.PAYMENT, [isLogin], PaymentController.viewPayment);
-router.get(VIEW_ROUTES.CREATE_PAYMENT, [isLogin], PaymentController.formCreatePayment);
-router.get(VIEW_ROUTES.UPDATE_PAYMENT, [isLogin], PaymentController.formUpdatePayment);
+router.get(VIEW_ROUTES.PAYMENT, [Auth.isLoginAdmin], PaymentController.viewPayment);
+router.get(VIEW_ROUTES.CREATE_PAYMENT, [Auth.isLoginAdmin], PaymentController.formCreatePayment);
+router.get(VIEW_ROUTES.UPDATE_PAYMENT, [Auth.isLoginAdmin], PaymentController.formUpdatePayment);
 
-router.get(VIEW_ROUTES.TRANSACTION, [isLogin], TransactionController.viewTransaction);
+router.get(VIEW_ROUTES.TRANSACTION, [Auth.isLoginAdmin], TransactionController.viewTransaction);
 
 export default router;

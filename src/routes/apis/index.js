@@ -9,6 +9,8 @@ import PaymentController from '../../controllers/payment-controller';
 import TransactionController from '../../controllers/transaction-controller';
 import UserController from '../../controllers/user-controller';
 import VoucherController from '../../controllers/voucher-controller';
+import PlayerController from '../../controllers/player-controller';
+import Auth from '../../middlewares/auth';
 
 const router = express.Router();
 
@@ -41,7 +43,14 @@ router.delete(API_ROUTES.DELETE_PAYMENT, PaymentController.deletePayment);
 
 router.put(API_ROUTES.UPDATE_STATUS_TRANSACTION, TransactionController.updateStatus);
 
-router.post(API_ROUTES.LOGIN, UserController.login);
+router.post(API_ROUTES.LOGIN_ADMIN, UserController.login);
 router.get(API_ROUTES.LOGOUT, UserController.logout);
+
+router.get(API_ROUTES.LANDING_PAGE, PlayerController.landingPage);
+router.get(API_ROUTES.DETAIL_PAGE, PlayerController.detailPage);
+router.post(API_ROUTES.REGISTER, multer({ dest: os.tmpdir() }).single('image'), PlayerController.register);
+router.get(API_ROUTES.CATEGORY, PlayerController.getCategories);
+router.post(API_ROUTES.LOGIN, PlayerController.login);
+router.post(API_ROUTES.CHECKOUT, [Auth.isLoginPlayer], PlayerController.checkout);
 
 export default router;

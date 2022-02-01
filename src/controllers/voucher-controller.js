@@ -68,7 +68,7 @@ class VoucherController {
 
   static createVoucher = async (req, res) => {
     try {
-      const { name, category, nominal } = req.body;
+      const { name, category, nominals } = req.body;
 
       if (req.file) {
         const tmpPath = req.file.path;
@@ -86,7 +86,7 @@ class VoucherController {
             const voucher = new Voucher({
               name,
               category,
-              nominal,
+              nominals,
               thumbnail: filename,
             });
 
@@ -104,7 +104,7 @@ class VoucherController {
         const voucher = new Voucher({
           name,
           category,
-          nominal,
+          nominals,
         });
         await voucher.save();
 
@@ -144,7 +144,7 @@ class VoucherController {
   static updateVoucher = async (req, res) => {
     try {
       const { id } = req.params;
-      const { name, category, nominal } = req.body;
+      const { name, category, nominals } = req.body;
 
       if (req.file) {
         const tmpPath = req.file.path;
@@ -170,7 +170,7 @@ class VoucherController {
             }, {
               name,
               category,
-              nominal,
+              nominals,
               thumbnail: filename,
             });
 
@@ -191,7 +191,7 @@ class VoucherController {
         }, {
           name,
           category,
-          nominal,
+          nominals,
         });
 
         req.flash('alertMessage', 'Edit data successfully');
