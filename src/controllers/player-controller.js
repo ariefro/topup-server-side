@@ -1,8 +1,8 @@
+import path from 'path';
+import fs from 'fs';
 import Player from '../models/player';
 import PlayerService from '../services/player-service';
 import BaseController from './base-controller';
-import path from 'path';
-import fs from 'fs';
 import config from '../config';
 
 class PlayerController extends BaseController {
@@ -79,6 +79,18 @@ class PlayerController extends BaseController {
         });
       }
       next(err);
+    }
+  };
+
+  static getCategories = async (req, res) => {
+    try {
+      const category = await PlayerService.getCategories();
+
+      return res.status(200).json(category);
+    } catch (err) {
+      const error = this.getError(err);
+
+      return res.status(error.code).json(error.message);
     }
   };
 }

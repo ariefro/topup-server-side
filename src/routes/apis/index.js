@@ -48,5 +48,6 @@ router.get(API_ROUTES.LOGOUT, UserController.logout);
 router.get(API_ROUTES.LANDING_PAGE, PlayerController.landingPage);
 router.get(API_ROUTES.DETAIL_PAGE, PlayerController.detailPage);
 router.post(API_ROUTES.REGISTER, multer({ dest: os.tmpdir() }).single('image'), PlayerController.register);
+router.get(API_ROUTES.CATEGORY, PlayerController.getCategories);
 
 export default router;

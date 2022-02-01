@@ -1,5 +1,5 @@
 import ERRORS from '../config/errors';
-import Player from '../models/player';
+import Category from '../models/category';
 import Voucher from '../models/voucher';
 
 class PlayerService {
@@ -24,6 +24,16 @@ class PlayerService {
     }
 
     return voucher;
+  };
+
+  static getCategories = async () => {
+    const category = await Category.find();
+
+    if (!category) {
+      throw new Error(ERRORS.NOT_FOUND);
+    }
+
+    return category;
   };
 }
 

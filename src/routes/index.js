@@ -32,6 +32,7 @@ const API_ROUTES = {
   LANDING_PAGE: '/landing-page',
   DETAIL_PAGE: `/detail-page/${ROUTE_PARAMS.id}`,
   REGISTER: '/register',
+  CATEGORY: '/category',
 };
 
 const VIEW_ROUTES = {
