@@ -1,9 +1,12 @@
 import path from 'path';
 import fs from 'fs';
+import bcrypt from 'bcrypt';
+import jwt from '../utils/jwt';
 import Player from '../models/player';
 import PlayerService from '../services/player-service';
 import BaseController from './base-controller';
 import config from '../config';
+import ERRORS from '../config/errors';
 
 class PlayerController extends BaseController {
   static landingPage = async (req, res) => {
@@ -87,6 +90,30 @@ class PlayerController extends BaseController {
       const category = await PlayerService.getCategories();
 
       return res.status(200).json(category);
+    } catch (err) {
+      const error = this.getError(err);
+
+      return res.status(error.code).json(error.message);
+    }
+  };
+
+  static login = async (req, res) => {
+    try {
+      const { email, password } = req.body;
+
+      const player = await PlayerService.getPlayerByEmail({ email });
+
+      if (!player) {
+        throw new Error(ERRORS.EMAIL_NOT_EXIST);
+      }
+
+      if (!bcrypt.compareSync(password, player.password)) {
+        throw new Error(ERRORS.WRONG_PASSWORD);
+      }
+
+      const token = jwt.sign({ _id: player._id });
+
+      return res.status(200).json({ data: player, token });
     } catch (err) {
       const error = this.getError(err);
 

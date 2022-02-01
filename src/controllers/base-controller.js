@@ -23,6 +23,14 @@ class BaseController {
         code: 422,
         message: 'Validation error',
       };
+      case ERRORS.EMAIL_NOT_EXIST: return {
+        code: 400,
+        message: 'Email is not exist',
+      };
+      case ERRORS.WRONG_PASSWORD: return {
+        code: 400,
+        message: 'Wrong password',
+      };
       default: return {
         code: 500,
         message: 'Internal server error',

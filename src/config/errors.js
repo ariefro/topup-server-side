@@ -4,6 +4,8 @@ const ERRORS = {
   BAD_REQUEST: 'bad request',
   EMAIL_OR_PASSWORD_DOESNT_MATCH: 'email_or_password_doesnt_match',
   VALIDATION_ERROR: 'validation error',
+  EMAIL_NOT_EXIST: 'email is not exist',
+  WRONG_PASSWORD: 'wrong password',
 };
 
 export default ERRORS;

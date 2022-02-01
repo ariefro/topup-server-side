@@ -1,5 +1,6 @@
 import ERRORS from '../config/errors';
 import Category from '../models/category';
+import Player from '../models/player';
 import Voucher from '../models/voucher';
 
 class PlayerService {
@@ -34,6 +35,15 @@ class PlayerService {
     }
 
     return category;
+  };
+
+  static getPlayerByEmail = async ({ email }) => {
+    const player = await Player.findOne({ email });
+
+    if (!player) {
+      throw new Error(ERRORS.EMAIL_NOT_EXIST);
+    }
+    return player;
   };
 }
 
