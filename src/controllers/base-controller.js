@@ -47,6 +47,10 @@ class BaseController {
         code: 400,
         message: 'Bank is not avaible',
       };
+      case ERRORS.TRANSACTION_NOT_FOUND: return {
+        code: 400,
+        message: 'Transaction is not found',
+      };
       default: return {
         code: 500,
         message: 'Internal server error',

@@ -193,7 +193,63 @@ class PlayerController extends BaseController {
 
       return res.status(200).json(transaction);
     } catch (err) {
-      console.log(err);
+      const error = this.getError(err);
+
+      return res.status(error.code).json(error.message);
+    }
+  };
+
+  static history = async (req, res) => {
+    try {
+      const { status = '' } = req.query;
+
+      let criteria = {};
+
+      if (status.length) {
+        criteria = {
+          ...criteria,
+          status: { $regex: `${status}`, $options: 'i' },
+        };
+      }
+
+      if (req.player._id) {
+        criteria = {
+          ...criteria,
+          player: req.player._id,
+        };
+      }
+
+      const history = await PlayerService.getTransaction(criteria);
+
+      const total = await Transaction.aggregate([
+        { $match: criteria },
+        {
+          $group: {
+            _id: null,
+            value: { $sum: '$value' },
+          },
+        },
+      ]);
+
+      return res.status(200).json({ data: history, total: total.length ? total[0].value : 0 });
+    } catch (err) {
+      const error = this.getError(err);
+
+      return res.status(error.code).json(error.message);
+    }
+  };
+
+  static historyDetail = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const history = await PlayerService.getTransactionById({ id });
+
+      if (!history) {
+        throw new Error(ERRORS.TRANSACTION_NOT_FOUND);
+      }
+
+      return res.status(200).json(history);
+    } catch (err) {
       const error = this.getError(err);
 
       return res.status(error.code).json(error.message);
