@@ -34,6 +34,7 @@ const API_ROUTES = {
   REGISTER: '/register',
   CATEGORY: '/category',
   LOGIN: '/login',
+  CHECKOUT: '/checkout',
 };
 
 const VIEW_ROUTES = {

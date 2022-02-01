@@ -1,5 +1,8 @@
 import ERRORS from '../config/errors';
+import Bank from '../models/bank';
 import Category from '../models/category';
+import Nominal from '../models/nominal';
+import Payment from '../models/payment';
 import Player from '../models/player';
 import Voucher from '../models/voucher';
 
@@ -44,6 +47,33 @@ class PlayerService {
       throw new Error(ERRORS.EMAIL_NOT_EXIST);
     }
     return player;
+  };
+
+  static getVoucherById = async ({ voucher }) => {
+    const getVoucher = await Voucher.findOne({ _id: voucher })
+      .populate('category')
+      .populate('user')
+      .select('name category _id thumbnail user');
+
+    return getVoucher;
+  };
+
+  static getNominalById = async ({ nominal }) => {
+    const getNominal = await Nominal.findOne({ _id: nominal });
+
+    return getNominal;
+  };
+
+  static getPaymentById = async ({ payment }) => {
+    const getPayment = await Payment.findOne({ _id: payment });
+
+    return getPayment;
+  };
+
+  static getBankById = async ({ bank }) => {
+    const getBank = await Bank.findOne({ _id: bank });
+
+    return getBank;
   };
 }
 

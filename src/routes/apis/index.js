@@ -10,6 +10,7 @@ import TransactionController from '../../controllers/transaction-controller';
 import UserController from '../../controllers/user-controller';
 import VoucherController from '../../controllers/voucher-controller';
 import PlayerController from '../../controllers/player-controller';
+import Auth from '../../middlewares/auth';
 
 const router = express.Router();
 
@@ -50,5 +51,6 @@ router.get(API_ROUTES.DETAIL_PAGE, PlayerController.detailPage);
 router.post(API_ROUTES.REGISTER, multer({ dest: os.tmpdir() }).single('image'), PlayerController.register);
 router.get(API_ROUTES.CATEGORY, PlayerController.getCategories);
 router.post(API_ROUTES.LOGIN, PlayerController.login);
+router.post(API_ROUTES.CHECKOUT, [Auth.isLoginPlayer], PlayerController.checkout);
 
 export default router;

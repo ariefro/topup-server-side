@@ -7,6 +7,7 @@ import PlayerService from '../services/player-service';
 import BaseController from './base-controller';
 import config from '../config';
 import ERRORS from '../config/errors';
+import Transaction from '../models/transaction';
 
 class PlayerController extends BaseController {
   static landingPage = async (req, res) => {
@@ -54,6 +55,7 @@ class PlayerController extends BaseController {
             const player = new Player({ ...payload, avatar: filename });
             await player.save();
             delete player._doc.password;
+
             return res.status(201).json({ data: player });
           } catch (err) {
             if (err && err.name === 'ValidationError') {
@@ -63,7 +65,7 @@ class PlayerController extends BaseController {
                 fields: err.errors,
               });
             }
-            next(err);
+            return next(err);
           }
         });
       } else {
@@ -81,7 +83,8 @@ class PlayerController extends BaseController {
           fields: err.errors,
         });
       }
-      next(err);
+
+      return next(err);
     }
   };
 
@@ -115,6 +118,82 @@ class PlayerController extends BaseController {
 
       return res.status(200).json({ data: player, token });
     } catch (err) {
+      const error = this.getError(err);
+
+      return res.status(error.code).json(error.message);
+    }
+  };
+
+  static checkout = async (req, res) => {
+    try {
+      const {
+        accountUser,
+        name, nominal,
+        voucher,
+        payment,
+        bank,
+      } = req.body;
+
+      const resVoucher = await PlayerService.getVoucherById({ voucher });
+      if (!resVoucher) {
+        throw new Error(ERRORS.VOUCHER_NOT_AVAIBLE);
+      }
+
+      const resNominal = await PlayerService.getNominalById({ nominal });
+      if (!resNominal) {
+        throw new Error(ERRORS.NOMINAL_NOT_AVAIBLE);
+      }
+
+      const resPayment = await PlayerService.getPaymentById({ payment });
+      if (!resPayment) {
+        throw new Error(ERRORS.PAYMENT_NOT_AVAIBLE);
+      }
+
+      const resBank = await PlayerService.getBankById({ bank });
+      if (!resBank) {
+        throw new Error(ERRORS.BANK_NOT_AVAIBLE);
+      }
+
+      const tax = (10 / 100) * resNominal._doc.price;
+      const value = resNominal._doc.price - tax;
+
+      const payload = {
+        historyVoucherTopup: {
+          gameName: resVoucher._doc.name,
+          category: resVoucher._doc.category ? resVoucher._doc.category.name : '',
+          thumbnail: resVoucher._doc.thumbnail,
+          coinName: resNominal._doc.coinName,
+          coinQuantity: resNominal._doc.coinQuantity,
+          price: resNominal._doc.price,
+        },
+        historyPayment: {
+          name: resBank._doc.name,
+          type: resPayment._doc.type,
+          bankName: resBank._doc.bankName,
+          noRekening: resBank._doc.noRekening,
+        },
+
+        name,
+        accountUser,
+        tax,
+        value,
+        player: req.player._id,
+        historyUser: {
+          name: resVoucher._doc.user?.name,
+          phoneNumber: resVoucher._doc.user?.phoneNumber,
+        },
+
+        user: resVoucher._doc.user?._id,
+        category: resVoucher._doc.category?._id,
+      };
+
+      const transaction = new Transaction(payload);
+
+      await transaction.save();
+
+      return res.status(200).json(transaction);
+    } catch (err) {
+      console.log(err);
       const error = this.getError(err);
 
       return res.status(error.code).json(error.message);

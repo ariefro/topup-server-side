@@ -31,6 +31,22 @@ class BaseController {
         code: 400,
         message: 'Wrong password',
       };
+      case ERRORS.VOUCHER_NOT_AVAIBLE: return {
+        code: 400,
+        message: 'Voucher is not avaible',
+      };
+      case ERRORS.NOMINAL_NOT_AVAIBLE: return {
+        code: 400,
+        message: 'Nominal is not avaible',
+      };
+      case ERRORS.PAYMENT_NOT_AVAIBLE: return {
+        code: 400,
+        message: 'Payment is not avaible',
+      };
+      case ERRORS.BANK_NOT_AVAIBLE: return {
+        code: 400,
+        message: 'Bank is not avaible',
+      };
       default: return {
         code: 500,
         message: 'Internal server error',

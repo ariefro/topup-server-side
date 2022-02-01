@@ -6,6 +6,10 @@ const ERRORS = {
   VALIDATION_ERROR: 'validation error',
   EMAIL_NOT_EXIST: 'email is not exist',
   WRONG_PASSWORD: 'wrong password',
+  VOUCHER_NOT_AVAIBLE: 'voucher is not avaible',
+  NOMINAL_NOT_AVAIBLE: 'nominal is not avaible',
+  PAYMENT_NOT_AVAIBLE: 'payment is not avaible',
+  BANK_NOT_AVAIBLE: 'bank is not avaible',
 };
 
 export default ERRORS;
