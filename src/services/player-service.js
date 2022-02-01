@@ -82,6 +82,12 @@ class PlayerService {
 
     return transaction;
   };
+
+  static getTransactionById = async ({ id }) => {
+    const transaction = await Transaction.findOne({ _id: id });
+
+    return transaction;
+  };
 }
 
 export default PlayerService;

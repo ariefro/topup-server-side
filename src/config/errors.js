@@ -10,6 +10,7 @@ const ERRORS = {
   NOMINAL_NOT_AVAIBLE: 'nominal is not avaible',
   PAYMENT_NOT_AVAIBLE: 'payment is not avaible',
   BANK_NOT_AVAIBLE: 'bank is not avaible',
+  TRANSACTION_NOT_FOUND: 'transaction not avaible',
 };
 
 export default ERRORS;

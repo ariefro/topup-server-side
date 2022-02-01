@@ -36,6 +36,7 @@ const API_ROUTES = {
   LOGIN: '/login',
   CHECKOUT: '/checkout',
   HISTORY: '/history',
+  TRANSACTION_DETAIL: `/transaction/${ROUTE_PARAMS.id}`,
 };
 
 const VIEW_ROUTES = {

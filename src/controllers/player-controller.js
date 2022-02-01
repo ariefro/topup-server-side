@@ -231,7 +231,24 @@ class PlayerController extends BaseController {
         },
       ]);
 
-      res.status(200).json({ data: history, total: total.length ? total[0].value : 0 });
+      return res.status(200).json({ data: history, total: total.length ? total[0].value : 0 });
+    } catch (err) {
+      const error = this.getError(err);
+
+      return res.status(error.code).json(error.message);
+    }
+  };
+
+  static historyDetail = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const history = await PlayerService.getTransactionById({ id });
+
+      if (!history) {
+        throw new Error(ERRORS.TRANSACTION_NOT_FOUND);
+      }
+
+      return res.status(200).json(history);
     } catch (err) {
       const error = this.getError(err);
 
