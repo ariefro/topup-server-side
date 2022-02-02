@@ -289,6 +289,25 @@ class PlayerController extends BaseController {
       return res.status(error.code).json(error.message);
     }
   };
+
+  static getProfile = async (req, res) => {
+    try {
+      const player = {
+        id: req.player._id,
+        username: req.player.username,
+        name: req.player.name,
+        email: req.player.email,
+        phone_number: req.player.phoneNumber,
+        avatar: req.player.avatar,
+      };
+
+      return res.status(200).json(player);
+    } catch (err) {
+      const error = this.getError(err);
+
+      return res.status(error.code).json(error.message);
+    }
+  };
 }
 
 export default PlayerController;

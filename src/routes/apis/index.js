@@ -55,5 +55,6 @@ router.post(API_ROUTES.CHECKOUT, [Auth.isLoginPlayer], PlayerController.checkout
 router.get(API_ROUTES.HISTORY, [Auth.isLoginPlayer], PlayerController.history);
 router.get(API_ROUTES.TRANSACTION_DETAIL, [Auth.isLoginPlayer], PlayerController.historyDetail);
 router.get(API_ROUTES.DASHBOARD, [Auth.isLoginPlayer], PlayerController.dashboard);
+router.get(API_ROUTES.GET_PROFILE, [Auth.isLoginPlayer], PlayerController.getProfile);
 
 export default router;
