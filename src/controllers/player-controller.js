@@ -255,6 +255,40 @@ class PlayerController extends BaseController {
       return res.status(error.code).json(error.message);
     }
   };
+
+  static dashboard = async (req, res) => {
+    try {
+      const count = await Transaction.aggregate([
+        { $match: { player: req.player._id } },
+        {
+          $group: {
+            _id: '$category',
+            value: { $sum: '$value' },
+          },
+        },
+      ]);
+
+      const category = await PlayerService.getCategories();
+
+      category.forEach((element) => {
+        count.forEach((item) => {
+          if (item._id.toString() === element._id.toString()) {
+            item.name = element.name;
+          }
+        });
+      });
+
+      const history = await Transaction.find({ player: req.player._id })
+        .populate('category')
+        .sort({ updatedAt: 'desc' });
+
+      return res.status(200).json({ data: history, count });
+    } catch (err) {
+      const error = this.getError(err);
+
+      return res.status(error.code).json(error.message);
+    }
+  };
 }
 
 export default PlayerController;
