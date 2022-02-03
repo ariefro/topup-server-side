@@ -54,5 +54,8 @@ router.post(API_ROUTES.LOGIN, PlayerController.login);
 router.post(API_ROUTES.CHECKOUT, [Auth.isLoginPlayer], PlayerController.checkout);
 router.get(API_ROUTES.HISTORY, [Auth.isLoginPlayer], PlayerController.history);
 router.get(API_ROUTES.TRANSACTION_DETAIL, [Auth.isLoginPlayer], PlayerController.historyDetail);
+router.get(API_ROUTES.DASHBOARD, [Auth.isLoginPlayer], PlayerController.dashboard);
+router.get(API_ROUTES.PROFILE, [Auth.isLoginPlayer], PlayerController.getProfile);
+router.put(API_ROUTES.UPDATE_PROFILE, [Auth.isLoginPlayer], multer({ dest: os.tmpdir() }).single('image'), PlayerController.updateProfile);
 
 export default router;

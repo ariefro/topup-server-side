@@ -255,6 +255,128 @@ class PlayerController extends BaseController {
       return res.status(error.code).json(error.message);
     }
   };
+
+  static dashboard = async (req, res) => {
+    try {
+      const count = await Transaction.aggregate([
+        { $match: { player: req.player._id } },
+        {
+          $group: {
+            _id: '$category',
+            value: { $sum: '$value' },
+          },
+        },
+      ]);
+
+      const category = await PlayerService.getCategories();
+
+      category.forEach((element) => {
+        count.forEach((item) => {
+          if (item._id.toString() === element._id.toString()) {
+            item.name = element.name;
+          }
+        });
+      });
+
+      const history = await Transaction.find({ player: req.player._id })
+        .populate('category')
+        .sort({ updatedAt: 'desc' });
+
+      return res.status(200).json({ data: history, count });
+    } catch (err) {
+      const error = this.getError(err);
+
+      return res.status(error.code).json(error.message);
+    }
+  };
+
+  static getProfile = async (req, res) => {
+    try {
+      const player = {
+        id: req.player._id,
+        username: req.player.username,
+        name: req.player.name,
+        email: req.player.email,
+        phone_number: req.player.phoneNumber,
+        avatar: req.player.avatar,
+      };
+
+      return res.status(200).json(player);
+    } catch (err) {
+      const error = this.getError(err);
+
+      return res.status(error.code).json(error.message);
+    }
+  };
+
+  static updateProfile = async (req, res, next) => {
+    try {
+      const { name = '', phoneNumber = '' } = req.body;
+
+      const payload = {};
+
+      if (name.length) payload.name = name;
+
+      if (phoneNumber.length) payload.phoneNumber = phoneNumber;
+
+      if (req.file) {
+        const tmpPath = req.file.path;
+        const originalExt = req.file.originalname.split('.')[req.file.originalname.split('.').length - 1];
+        const filename = `${req.file.filename}.${originalExt}`;
+        const targetPath = path.resolve(config.rootPath, `public/uploads/${filename}`);
+
+        const src = fs.createReadStream(tmpPath);
+        const dest = fs.createWriteStream(targetPath);
+
+        src.pipe(dest);
+
+        src.on('end', async () => {
+          let player = await Player.findOne({ _id: req.player._id });
+          const currentImage = `${config.rootPath}/public/uploads/${player.avatar}`;
+
+          if (fs.existsSync(currentImage)) {
+            fs.unlinkSync(currentImage);
+          }
+
+          player = await Player.findOneAndUpdate({
+            _id: req.player._id,
+          }, {
+            ...payload,
+            avatar: filename,
+          }, { new: true, runValidators: true });
+
+          res.status(200).json({
+            data: {
+              id: player._id,
+              name: player.name,
+              phoneNumber: player.phoneNumber,
+              avatar: player.avatar,
+            },
+          });
+
+          src.on('err', async () => {
+            next();
+          });
+        });
+      } else {
+        const player = await Player.findOneAndUpdate({
+          _id: req.player._id,
+        }, payload, { new: true, runValidators: true });
+        return res.status(200).json({
+          data: {
+            id: player._id,
+            name: player.name,
+            phoneNumber: player.phoneNumber,
+            avatar: player.avatar,
+          },
+        });
+      }
+    } catch (err) {
+      const error = this.getError(err);
+
+      return res.status(error.code).json(error.message);
+    }
+  };
 }
 
 export default PlayerController;

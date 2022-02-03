@@ -149,7 +149,7 @@ class VoucherController {
       if (req.file) {
         const tmpPath = req.file.path;
         const originalExt = req.file.originalname.split('.')[req.file.originalname.split('.').length - 1];
-        const filename = `${req.filename}.${originalExt}`;
+        const filename = `${req.file.filename}.${originalExt}`;
         const targetPath = path.resolve(config.rootPath, `public/uploads/${filename}`);
 
         const src = fs.createReadStream(tmpPath);

@@ -13,7 +13,7 @@ const playerSchema = Schema({
     type: String,
     require: [true, 'nama harus diisi'],
     maxlength: [225, 'panjang nama harus diantara 9-225 karakter'],
-    minlength: [9, 'panjang nama harus diantara 9-225 karakter'],
+    minlength: [5, 'panjang nama harus diantara 5-225 karakter'],
   },
 
   username: {
