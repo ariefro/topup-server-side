@@ -38,7 +38,8 @@ const API_ROUTES = {
   HISTORY: '/history',
   TRANSACTION_DETAIL: `/transaction/${ROUTE_PARAMS.id}`,
   DASHBOARD: '/dashboard',
-  GET_PROFILE: '/profile',
+  PROFILE: '/profile',
+  UPDATE_PROFILE: '/update-profile',
 };
 
 const VIEW_ROUTES = {
