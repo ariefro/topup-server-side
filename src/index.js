@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import cors from 'cors';
 import methodOverride from 'method-override';
 import session from 'express-session';
 import flash from 'connect-flash';
@@ -21,6 +22,8 @@ app.use(session({
   cookie: { },
 }));
 app.use(flash());
+
+app.use(cors());
 
 app.use('/', views);
 app.use('/api', apis);
